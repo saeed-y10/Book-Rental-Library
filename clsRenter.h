@@ -15,7 +15,6 @@ private:
 	float _DayPrice;
 	clsDate _RentDate;
 	clsDate _ReturnDate;
-	float _PenaltyPerDay;
 
 public:
 
@@ -25,8 +24,11 @@ public:
 		_RentDate = RentDate;
 		_ReturnDate = clsDate::IncreaceDateByNDays(RentDays, _RentDate);
 		_RentDays = RentDays;
-		_DayPrice = 0;
-		_PenaltyPerDay = _DayPrice * 2;
+
+		if (DayPrice <= .0)
+			DayPrice = 1;
+
+		_DayPrice = DayPrice;
 	}
 
 	static clsRenter getEmptyRenterObject()
@@ -40,7 +42,6 @@ public:
 			DayPrice = 1;
 
 		_DayPrice = DayPrice;
-		_PenaltyPerDay = _DayPrice * 2;
 	}
 
 	float getDayPrice()
@@ -81,31 +82,30 @@ public:
 
 	bool IsDelayReturn()
 	{
-		clsDate CurrentDate;
-
-		return CurrentDate.IsDateAfterDate2(_ReturnDate);
+		return clsDate().IsDateAfterDate2(_ReturnDate);
 	}
 
 	short DelayDays()
 	{
-		short DelayDays = clsDate::GetDiffrenceInDays(_ReturnDate, clsDate());
+		if (_ReturnDate.IsDateBeforeDate2(clsDate()))
+			return clsDate::GetDiffrenceInDays(_ReturnDate, clsDate());
 
-		return (DelayDays < 0) ? 0 : DelayDays;
+		return 0;
 	}
 
 	float PenaltyPerDay()
 	{
-		return _PenaltyPerDay;
+		return _DayPrice * 2;
 	}
 
-	float TotalDelayPenalty()
+	float TotalPenalty()
 	{
 		return (float)DelayDays() * PenaltyPerDay();
 	}
 
-	float TotalPrice()
+	float TotalBill()
 	{
-		return (float)_RentDays * _DayPrice;
+		return (float)(_RentDays * _DayPrice) + TotalPenalty();
 	}
 
 };

@@ -284,6 +284,7 @@ public:
 		if (DayPrice <= .0)
 			DayPrice = 1;
 
+		this->Renter.DayPrice = DayPrice;
 		_Mode = Mode;
 		_ID = ID;
 		_Name = Name;

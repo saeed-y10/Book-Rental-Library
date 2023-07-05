@@ -149,6 +149,7 @@
     <ClInclude Include="clsPerson.h" />
     <ClInclude Include="clsRentBookScreen.h" />
     <ClInclude Include="clsRenter.h" />
+    <ClInclude Include="clsReturnBookScreen.h" />
     <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUser.h" />

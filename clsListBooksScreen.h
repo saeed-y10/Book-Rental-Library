@@ -31,7 +31,7 @@ private:
 		cout << left << setw(30) << Book.Name << "|";
 		cout << left << setw(30) << Book.Author << "|";
 		cout << left << setw(10) << Book.getCategoryName() << "|";
-		cout << left << fixed << setw(10) << setprecision(3) << Book.DayPrice << "|";
+		cout << left << fixed << setw(10) << setprecision(2) << Book.DayPrice << "|";
 		cout << left << setw(10) << _getStatusName(Book.IsAvailable()) << "|";
 		
 		if (Book.IsAvailable())

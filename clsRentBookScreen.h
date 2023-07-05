@@ -137,20 +137,20 @@ private:
 
 			if (Book.RentBook(Info.FirstName, Info.LastName, Info.Email, Info.Phone, Info.RentDays))
 			{
-				cout << " \n Book Rented successfully.\n";
+				cout << " \n Book rented successfully.\n";
 
 				_PrintBook(Book);
 			}
 
 			else
 			{
-				cout << "\n Book Rent Faild.\n";
+				cout << "\n Book rent Faild.\n";
 			}
 		}
 
 		else
 		{
-			cout << "\n Rent canceled.\n";
+			cout << "\n Book rent canceled.\n";
 		}
 
 	}
