@@ -141,11 +141,19 @@
   <ItemGroup>
     <ClInclude Include="clsBook.h" />
     <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsFindBookScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsListBooksScreen.h" />
+    <ClInclude Include="clsLoginScreen.h" />
+    <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="clsRentBookScreen.h" />
     <ClInclude Include="clsRenter.h" />
+    <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
+    <ClInclude Include="clsUser.h" />
     <ClInclude Include="clsUtil.h" />
+    <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

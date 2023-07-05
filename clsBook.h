@@ -41,7 +41,6 @@ private:
 		Line += to_string(Book._Category) + Seperator;
 		Line += to_string(Book.DayPrice) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.FirstName) + Seperator;
-		Line += clsUtil::EncryptText(Book.Renter.MiddleName) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.LastName) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.Email) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.Phone) + Seperator;
@@ -56,7 +55,7 @@ private:
 	{
 		vector<string> vLine = clsString::Split(Line, Seperator);
 		
-		clsRenter Renter(clsUtil::DecryptText(vLine[6]), clsUtil::DecryptText(vLine[7]), clsUtil::DecryptText(vLine[8]), clsUtil::DecryptText(vLine[9]), clsUtil::DecryptText(vLine[10]), stoi(clsUtil::DecryptText(vLine[11])), clsDate(clsUtil::DecryptText(vLine[12])));
+		clsRenter Renter(clsUtil::DecryptText(vLine[6]), clsUtil::DecryptText(vLine[7]), clsUtil::DecryptText(vLine[8]), clsUtil::DecryptText(vLine[9]), stoi(clsUtil::DecryptText(vLine[10])), clsDate(clsUtil::DecryptText(vLine[11])));
 		clsBook Book(enMode::eUpdate, stoi(vLine[1]), clsUtil::DecryptText(vLine[2]), clsUtil::DecryptText(vLine[3]), (enCategorys)stoi(vLine[4]), stof(vLine[5]), Renter);
 
 		Book._Available = stoi(vLine[0]);
@@ -65,7 +64,7 @@ private:
 	}
 	
 	// load all books from file
-	static vector<clsBook> _LoadBooksDataFromFile(string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile(bool OnlyAvailable = false, string FileName = "Books.txt")
 	{
 		vector<clsBook> vBooks;
 
@@ -81,7 +80,18 @@ private:
 			{
 				clsBook Book = _ConvertLineToBookObject(Line);
 
-				vBooks.push_back(Book);
+				if (OnlyAvailable)
+				{
+					if (Book.IsAvailable())
+					{
+						vBooks.push_back(Book);
+					}
+				}
+
+				else
+				{
+					vBooks.push_back(Book);
+				}
 			}
 
 			File.close();
@@ -91,7 +101,7 @@ private:
 	}
 
 	// load books dat by category from file
-	static vector<clsBook> _LoadBooksDataFromFile(enCategorys Category, string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile(enCategorys Category, bool OnlyAvailable = false, string FileName = "Books.txt")
 	{
 		vector<clsBook> vBooks;
 
@@ -109,7 +119,18 @@ private:
 
 				if (Book.Category == Category)
 				{
-					vBooks.push_back(Book);
+					if (OnlyAvailable)
+					{
+						if (Book.IsAvailable())
+						{
+							vBooks.push_back(Book);
+						}
+					}
+
+					else
+					{
+						vBooks.push_back(Book);
+					}
 				}
 
 			}
@@ -121,7 +142,7 @@ private:
 	}
 
 	// load books dat by author name from file
-	static vector<clsBook> _LoadBooksDataFromFile(string Author, string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile(string Author, bool OnlyAvailable = false, string FileName = "Books.txt")
 	{
 		vector<clsBook> vBooks;
 
@@ -139,7 +160,19 @@ private:
 
 				if (Book.Author == Author)
 				{
-					vBooks.push_back(Book);
+					if (OnlyAvailable)
+					{
+						if (Book.IsAvailable())
+						{
+							vBooks.push_back(Book);
+						}
+					}
+
+					else
+					{
+						vBooks.push_back(Book);
+					}
+					
 				}
 
 			}
@@ -151,7 +184,7 @@ private:
 	}
 
 	// save books data to file
-	static void _SaveBooksDataToFile(vector<clsBook> vBooks, string FileName = "Books.txt")
+	static void _SaveBooksDataToFile(vector<clsBook> vBooks,  string FileName = "Books.txt")
 	{
 		fstream File;
 
@@ -268,7 +301,7 @@ public:
 	// all books categorys
 	enum enCategorys
 	{
-		eNovle = 1,
+		eNovel = 1,
 		eSciences = 2,
 		eHistory = 3,
 		eReligious = 4,
@@ -305,7 +338,7 @@ public:
 		return true;
 	}
 
-	// method to update or add new book
+	// method to update or add new book to database
 	enSaveResult Save()
 	{
 		switch (_Mode)
@@ -343,6 +376,7 @@ public:
 			{*/
 			
 			_Update();
+
 			return enSaveResult::svSucceeded;
 			
 			//}
@@ -356,7 +390,7 @@ public:
 		}
 	}
 
-	// search for book by id and return clsbook if it is found or return empty clsbook 
+	// search for book by id and return clsbook if Book is found or return empty clsbook 
 	static clsBook Find(int ID)
 	{
 		fstream File;
@@ -384,6 +418,67 @@ public:
 
 		return _getEmptyBookObject();
 	}
+
+	// Find by book name and return clsBook object
+	static vector<clsBook> Find(string BookName)
+	{
+		fstream File;
+
+		File.open("Books.txt", ios::in);
+
+		vector<clsBook> vBooks;
+
+		if (File.is_open())
+		{
+			string Line = "";
+
+			while (getline(File, Line))
+			{
+				clsBook Book = _ConvertLineToBookObject(Line);
+
+				if (Book.Name == BookName)
+				{
+					File.close();
+
+					vBooks.push_back(Book);
+				}
+			}
+
+			File.close();
+		}
+
+		return vBooks;
+	}
+
+	// Find by author name and return clsBook object
+	static vector<clsBook> FindByAuthor(string AuthorName)
+	{
+		vector<clsBook> vBooks;
+
+		fstream File;
+
+		File.open("Books.txt", ios::in);
+
+		if (File.is_open())
+		{
+			string Line = "";
+
+			while (getline(File, Line))
+			{
+				clsBook Book = _ConvertLineToBookObject(Line);
+
+				if (Book.Author == AuthorName)
+				{
+					vBooks.push_back(Book);
+				}
+
+			}
+
+			File.close();
+		}
+
+		return vBooks;
+	}
 	
 	// check is book id exist in database and return true or false
 	static bool IsBookExist(int ID)
@@ -397,16 +492,19 @@ public:
 		return clsBook(enMode::eNew, ID, " ", " ", enCategorys::eOthers, 1, clsRenter::getEmptyRenterObject());
 	}
 
+	// Check is book mode is empty
 	bool IsEmpty()
 	{
 		return _Mode == enMode::eEmpty;
 	}
 
+	// Check is book deleted
 	bool IsMarkedForDelete()
 	{
 		return _MarkForDelete;
 	}
 
+	// clsBook object modes
 	enMode Mode()
 	{
 		return _Mode;
@@ -449,8 +547,8 @@ public:
 	{
 		switch (_Category)
 		{
-		case enCategorys::eNovle:
-			return "Novle";
+		case enCategorys::eNovel:
+			return "Novel";
 
 		case enCategorys::eHistory:
 			return "History";
@@ -503,46 +601,50 @@ public:
 	}
 
 	// rent a book
-	void RentBook(string FirstName, string MiddleName, string LastName, string Email, string Phone, short RentDays)
+	bool RentBook(string FirstName, string LastName, string Email, string Phone, short RentDays)
 	{
 		if (!IsAvailable())
-			return;
+			return false;
 
-		Renter = clsRenter(FirstName, MiddleName, LastName, Email, Phone, RentDays, clsDate());
+		Renter = clsRenter(FirstName, LastName, Email, Phone, RentDays);
 		Renter.DayPrice = _DayPrice;
 		_Available = false;
 
 		_Update();
+
+		return true;
 	}
 
 	// return the rented book
-	void ReturnBook()
+	bool ReturnBook()
 	{
 		if (IsAvailable())
-			return;
+			return false;
 
 		_Available = true;
 		Renter = clsRenter::getEmptyRenterObject();
 
 		_Update();
+
+		return true;
 	}
 
 	// return all books in database
-	vector<clsBook> getBooksList()
+	static vector<clsBook> getBooksList(bool OnlyAvailable = false)
 	{
-		return _LoadBooksDataFromFile();
+		return _LoadBooksDataFromFile(OnlyAvailable);
 	}
 
 	// return all books in database by category
-	vector<clsBook> getBooksList(enCategorys Category)
+	static vector<clsBook> getBooksList(enCategorys Category, bool OnlyAvailable = false)
 	{
-		return _LoadBooksDataFromFile(Category);
+		return _LoadBooksDataFromFile(Category, OnlyAvailable);
 	}
 
 	// return all books in database by author name
-	vector<clsBook> getBooksList(string Author)
+	static vector<clsBook> getBooksList(string Author, bool OnlyAvailable = false)
 	{
-		return _LoadBooksDataFromFile(Author, "Books.txt");
+		return _LoadBooksDataFromFile(Author, OnlyAvailable);
 	}
 
 };

@@ -30,7 +30,7 @@ public:
 		return Number;
 	}
 
-	template <typename T> static T ReadNumberbetween(T From, T To, string ErrorMessage)
+	template <typename T> static T ReadNumberBetween(T From, T To, string ErrorMessage)
 	{
 		T Number = 0;
 
@@ -45,30 +45,10 @@ public:
 		return Number;
 	}
 
-	static bool IsNumberBetween(short Number, short From, short To)
-	{
-		return (Number >= From && Number <= To);
-	}
-
-	static bool IsNumberBetween(int Number, int From, int To)
-	{
-		return (Number >= From && Number <= To);
-	}
-
-	static bool IsNumberBetween(float Number, float From, float To)
-	{
-		return (Number >= From && Number <= To);
-	}
-
-	static bool IsNumberBetween(double Number, double From, double To)
-	{
-		return (Number >= From && Number <= To);
-	}
-
 	static bool IsDateBetween(clsDate Date, clsDate From, clsDate To)
 	{
 		//if Date >= From && Date <= To
-		/*if ((clsdate::IsDateAfterDate2(Date, From) || clsdate::IsDateEqualDate2(Date, From)) 
+		/*if ((clsdate::IsDateAfterDate2(Date, From) || clsdate::IsDateEqualDate2(Date, From))
 			&&
 			(clsdate::IsDateBeforeDate2(Date, To) || clsdate::IsDateEqualDate2(Date, To)))
 			return true;
@@ -92,10 +72,43 @@ public:
 		return clsDate::IsValid(Date);
 	}
 
-	static int ReadIntNumber(string ErrorMessage) 
+	static string ReadString()
+	{
+		string str;
+
+		do
+		{
+			getline(cin >> ws, str);
+
+		} while (str == "");
+
+		return str;
+	}
+
+	/*static bool IsNumberBetween(short Number, short From, short To)
+	{
+		return (Number >= From && Number <= To);
+	}
+
+	static bool IsNumberBetween(int Number, int From, int To)
+	{
+		return (Number >= From && Number <= To);
+	}
+
+	static bool IsNumberBetween(float Number, float From, float To)
+	{
+		return (Number >= From && Number <= To);
+	}
+
+	static bool IsNumberBetween(double Number, double From, double To)
+	{
+		return (Number >= From && Number <= To);
+	}*/
+
+	/*static int ReadIntNumber(string ErrorMessage)
 	{
 		int Number = 0;
-	
+
 		while (!(cin >> Number))
 		{
 			cin.clear();
@@ -117,66 +130,6 @@ public:
 		{
 			cout << ErrorMessage;
 			Number = ReadIntNumber(ErrorMessage);
-		}
-
-		return Number;
-	}
-
-	static short ReadShortNumber(string ErrorMessage)
-	{
-		short Number = 0;
-
-		while (!(cin >> Number))
-		{
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << ErrorMessage;
-		}
-
-		return Number;
-	}
-
-	static short ReadShortNumberBetween(short From, short To, string ErrorMessage)
-	{
-		short Number = 0;
-
-		Number = ReadShortNumber(ErrorMessage);
-
-		while (!IsNumberBetween(Number, From, To))
-		{
-			cout << ErrorMessage;
-			Number = ReadShortNumber(ErrorMessage);
-		}
-
-		return Number;
-	}
-
-	static float ReadFloatNumber(string ErrorMessage)
-	{
-		float Number = 0;
-
-		while (!(cin >> Number))
-		{
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << ErrorMessage;
-		}
-
-		return Number;
-	}
-
-	static float ReadFloatNumberBetween(float From, float To, string ErrorMessage)
-	{
-		float Number = 0;
-
-		Number = ReadFloatNumber(ErrorMessage);
-
-		while (!IsNumberBetween(Number, From, To))
-		{
-			cout << ErrorMessage;
-			Number = ReadFloatNumber(ErrorMessage);
 		}
 
 		return Number;
@@ -210,19 +163,7 @@ public:
 		}
 
 		return Number;
-	}
-
-	static string ReadString()
-	{
-		string str = "";
-
-		while (str == "")
-		{
-			getline(cin >> ws, str);
-		}
-	
-		return str;
-	}
+	}*/
 
 };
 

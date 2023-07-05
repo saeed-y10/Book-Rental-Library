@@ -11,18 +11,16 @@ class clsPerson
 private:
 
 	string _FirstName;
-	string _MiddleName;
 	string _LastName;
 	string _Email;
 	string _Phone;
 
 public:
 
-	clsPerson(string FirstName, string MiddleName, string LastName, string Email, string Phone)
+	clsPerson(string FirstName, string LastName, string Email, string Phone)
 	{
 		_FirstName = FirstName;
 		_LastName = LastName;
-		_MiddleName = MiddleName;
 		_Email = Email;
 		_Phone = Phone;
 	}
@@ -37,17 +35,6 @@ public:
 		return _FirstName;
 	}
 	__declspec(property(get = GetFirstName, put = SetFirstName)) string FirstName;
-
-	void SetMiddleName(string MiddleName)
-	{
-		_MiddleName = MiddleName;
-	}
-
-	string GetMiddleName()
-	{
-		return _MiddleName;
-	}
-	__declspec(property(get = GetMiddleName, put = SetMiddleName)) string MiddleName;
 
 	void SetLastName(string LastName)
 	{

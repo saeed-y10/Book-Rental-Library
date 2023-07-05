@@ -3,21 +3,16 @@
 
 #include <iostream>
 #include "clsBook.h";
+#include "clsLoginScreen.h"
+#include "clsFindBookScreen.h"
+#include "clsInputValidate.h"
 
 using namespace std;
 
 int main()
 {
-    clsBook Book = clsBook::Find(2);
 
-    if (Book.IsEmpty())
-        cout << "Book is not found.\n";
-
-    else
-    {
-        cout << "Name  : " << Book.Name << endl;
-        cout << "Author: " << Book.Author << endl;
-    }
-
+    clsLoginScreen::ShowLoginScreen();
+    
     return 0;
 }
