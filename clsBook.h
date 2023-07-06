@@ -315,7 +315,7 @@ public:
 		svFaildEmpty = 0,
 		svSucceeded = 1,
 		svFaildIDExist = 2,
-		svFaildIDnotExist = 3,
+		svFaildINotExist = 3,
 	};
 
 	// delete the book from database

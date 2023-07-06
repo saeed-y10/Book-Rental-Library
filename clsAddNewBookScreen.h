@@ -27,8 +27,8 @@ private:
 
 		while (clsBook::IsIDNumberExist(ID))
 		{
-			cout << " Book with ID number [" << ID << "] is already exist enter another one: ";
-			ID = clsInputValidate::ReadNumberBetween<int>(1, INT_MAX, " Book with ID number [" + to_string(ID) + "] is already exist enter another one: ");
+			cout << " ID number already exist enter another one: ";
+			ID = clsInputValidate::ReadNumberBetween<int>(1, INT_MAX, " ID Number: ");
 		}
 
 		return ID;
@@ -47,8 +47,11 @@ private:
 		return (clsBook::enCategorys)clsInputValidate::ReadNumberBetween<short>(1, 5, " Category number: ");
 	}
 
-	static clsBook _ReadNewBook()
+	static clsBook _ReadNewBookInfo()
 	{
+		cout << "\n Read Book Info: \n";
+		cout << " ___________________________________\n";
+
 		clsBook Book = clsBook::getNewBookObject(_ReadIdNumber());
 		
 		cout << "\n Book Name      : ";
@@ -76,7 +79,7 @@ private:
 		cout << left << setw(38) << Book.Name << "|";
 		cout << left << setw(25) << Book.Author << "|";
 		cout << left << setw(9) << Book.getCategoryName() << "|";
-		cout << left << fixed << setw(9) << setprecision(3) << Book.DayPrice << "|";
+		cout << left << fixed << setw(9) << setprecision(2) << Book.DayPrice << "|";
 		cout << left << setw(9) << _getStatusName(Book.IsAvailable()) << "|";
 
 		if (Book.IsAvailable())
@@ -116,13 +119,13 @@ private:
 
 	static void _AddNewBook()
 	{
-		clsBook Book = _ReadNewBook();
+		clsBook Book = _ReadNewBookInfo();
 
 		_PrintBook(Book);
 
 		char Sure = 'N';
 
-		cout << "\n Are you sure you want to add this book? Y/N? ";
+		cout << "\n Are you sure to add this book? Y/N? ";
 		cin >> Sure;
 
 		if (toupper(Sure) == 'Y')

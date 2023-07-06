@@ -142,6 +142,7 @@
     <ClInclude Include="clsAddNewBookScreen.h" />
     <ClInclude Include="clsBook.h" />
     <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsDeleteBookScreen.h" />
     <ClInclude Include="clsFindBookScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
     <ClInclude Include="clsListBooksScreen.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="clsReturnBookScreen.h" />
     <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
+    <ClInclude Include="clsUpdateBookScreen.h" />
     <ClInclude Include="clsUser.h" />
     <ClInclude Include="clsUtil.h" />
     <ClInclude Include="Global.h" />

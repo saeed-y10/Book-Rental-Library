@@ -11,6 +11,8 @@
 #include "clsRentBookScreen.h"
 #include "clsReturnBookScreen.h"
 #include "clsAddNewBookScreen.h"
+#include "clsUpdateBookScreen.h"
+#include "clsDeleteBookScreen.h"
 
 using namespace std;
 
@@ -128,6 +130,16 @@ private:
 		clsAddNewBookScreen::ShowAddNewBookScreen();
 	}
 
+	static void _ShowUpdateBookScreen()
+	{
+		clsUpdateBookScreen::_ShowUpdateBookScreen();
+	}
+
+	static void _ShowDeleteBookScreen()
+	{
+		clsDeleteBookScreen::ShowDeleteBookScreen();
+	}
+
 	static void _PerformMainMenuOption(enMainMenuOptions Option)
 	{
 		switch (Option)
@@ -172,17 +184,15 @@ private:
 
 		case enMainMenuOptions::eUpdateBook:
 		{
-
-
-			_PrintGoBackToMainMenu();
+			_ShowUpdateBookScreen();
+			
 			break;
 		}
 
 		case enMainMenuOptions::eDeleteBook:
 		{
+			_ShowDeleteBookScreen();
 
-
-			_PrintGoBackToMainMenu();
 			break;
 		}
 
