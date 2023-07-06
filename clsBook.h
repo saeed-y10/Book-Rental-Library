@@ -648,5 +648,33 @@ public:
 		return _LoadBooksDataFromFile(Author, OnlyAvailable);
 	}
 
+	static vector<clsBook> getRentedBooksList()
+	{
+		vector<clsBook> vBooks;
+
+		fstream File;
+
+		File.open("Books.txt", ios::in);
+
+		if (File.is_open())
+		{
+			string Line = "";
+
+			while (getline(File, Line))
+			{
+				clsBook Book = _ConvertLineToBookObject(Line);
+
+				if (!Book.IsAvailable())
+				{
+					vBooks.push_back(Book);
+				}
+			}
+
+			File.close();
+		}
+
+		return vBooks;
+	}
+
 };
 

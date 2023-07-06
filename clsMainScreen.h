@@ -13,6 +13,8 @@
 #include "clsAddNewBookScreen.h"
 #include "clsUpdateBookScreen.h"
 #include "clsDeleteBookScreen.h"
+#include "clsManageUsersScreen.h"
+#include "clsManageRentersScreen.h"
 
 using namespace std;
 
@@ -140,6 +142,16 @@ private:
 		clsDeleteBookScreen::ShowDeleteBookScreen();
 	}
 
+	static void _ShowManageRentersScreen()
+	{
+		clsManageRentersScreen::ShowManageRentersMenu();
+	}
+
+	static void _ShowManageUsersScreen()
+	{
+		clsManageUsersScreen::ShowManageUsersMenu();
+	}
+
 	static void _PerformMainMenuOption(enMainMenuOptions Option)
 	{
 		switch (Option)
@@ -198,17 +210,15 @@ private:
 
 		case enMainMenuOptions::eManageRenters:
 		{
+			_ShowManageRentersScreen();
 
-
-			_PrintGoBackToMainMenu();
 			break;
 		}
 
 		case enMainMenuOptions::eManageUsers:
 		{
+			_ShowManageUsersScreen();
 
-
-			_PrintGoBackToMainMenu();
 			break;
 		}
 

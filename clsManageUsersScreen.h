@@ -121,8 +121,6 @@ private:
 
 		default:
 		{
-	     	return;
-
 			break;
 		}
 
@@ -136,7 +134,7 @@ private:
 			return;
 		}
 
-		enManageUsersMenuOptions Option = _ReadManageUsersMenuOption();
+		enManageUsersMenuOptions Option = enManageUsersMenuOptions::eBackToMainMenu;
 
 		do
 		{

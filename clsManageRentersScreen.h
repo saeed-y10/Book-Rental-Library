@@ -72,7 +72,7 @@ private:
 
 	static void _ShowListRentersScreen()
 	{
-		clsListRentersScreen();
+		clsListRentersScreen::ShowListRentersScreen();
 	}
 
 	static void _ShowFindRenterScreen()
