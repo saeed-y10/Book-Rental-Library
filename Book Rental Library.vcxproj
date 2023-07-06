@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="clsAddNewBookScreen.h" />
     <ClInclude Include="clsBook.h" />
     <ClInclude Include="clsDate.h" />
     <ClInclude Include="clsFindBookScreen.h" />

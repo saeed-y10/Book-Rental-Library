@@ -10,6 +10,7 @@
 #include "clsFindBookScreen.h"
 #include "clsRentBookScreen.h"
 #include "clsReturnBookScreen.h"
+#include "clsAddNewBookScreen.h"
 
 using namespace std;
 
@@ -122,6 +123,11 @@ private:
 		clsReturnBookScreen::ShowReturnBookScreen();
 	}
 
+	static void _AddNewBookScreen()
+	{
+		clsAddNewBookScreen::ShowAddNewBookScreen();
+	}
+
 	static void _PerformMainMenuOption(enMainMenuOptions Option)
 	{
 		switch (Option)
@@ -140,8 +146,6 @@ private:
 		{
 			_ShowFindBookScreen();
 
-			_PrintGoBackToMainMenu();
-
 			break;
 		}
 
@@ -149,26 +153,20 @@ private:
 		{
 			_ShowRentBookScreen();
 
-			_PrintGoBackToMainMenu();
-			
 			break;
 		}
 
 		case enMainMenuOptions::eReturnBook:
 		{
-
 			_ShowRenturnBookScreen();
 
-			_PrintGoBackToMainMenu();
-			
 			break;
 		}
 
 		case enMainMenuOptions::eAddNewBook:
 		{
-
-
-			_PrintGoBackToMainMenu();
+			_AddNewBookScreen();
+			
 			break;
 		}
 

@@ -351,7 +351,7 @@ public:
 
 		case clsBook::eNew:
 		{
-			if (IsBookExist(ID()))
+			if (IsIDNumberExist(ID()))
 			{
 				return enSaveResult::svFaildIDExist;
 			}
@@ -482,7 +482,7 @@ public:
 	}
 	
 	// check is book id exist in database and return true or false
-	static bool IsBookExist(int ID)
+	static bool IsIDNumberExist(int ID)
 	{
 		return !(Find(ID).IsEmpty());
 	}
@@ -490,7 +490,7 @@ public:
 	// return empty clsbook object
 	static clsBook getNewBookObject(int ID)
 	{
-		return clsBook(enMode::eNew, ID, " ", " ", enCategorys::eOthers, 1, clsRenter::getEmptyRenterObject());
+		return clsBook(enMode::eNew, ID, "", "", enCategorys::eOthers, 1, clsRenter::getEmptyRenterObject());
 	}
 
 	// Check is book mode is empty

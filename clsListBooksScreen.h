@@ -28,11 +28,11 @@ private:
 	static void _PrintBookLine(clsBook Book)
 	{
 		cout << " |" << left << setw(7) << Book.ID() << "|";
-		cout << left << setw(30) << Book.Name << "|";
-		cout << left << setw(30) << Book.Author << "|";
-		cout << left << setw(10) << Book.getCategoryName() << "|";
-		cout << left << fixed << setw(10) << setprecision(2) << Book.DayPrice << "|";
-		cout << left << setw(10) << _getStatusName(Book.IsAvailable()) << "|";
+		cout << left << setw(38) << Book.Name << "|";
+		cout << left << setw(25) << Book.Author << "|";
+		cout << left << setw(9) << Book.getCategoryName() << "|";
+		cout << left << fixed << setw(9) << setprecision(2) << Book.DayPrice << "|";
+		cout << left << setw(9) << _getStatusName(Book.IsAvailable()) << "|";
 		
 		if (Book.IsAvailable())
 			cout << left << setw(13) << " " << "|\n";
@@ -54,11 +54,11 @@ private:
 	{
 		cout << " ______________________________________________________________________________________________________________________\n\n";
 		cout << " |" << left << setw(7) << "ID";
-		cout << "|" << left << setw(30) << "Name";
-		cout << "|" << left << setw(30) << "Author";
-		cout << "|" << left << setw(10) << "Category";
-		cout << "|" << left << setw(10) << "Day Price";
-		cout << "|" << left << setw(10) << "Status";
+		cout << "|" << left << setw(38) << "Name";
+		cout << "|" << left << setw(25) << "Author";
+		cout << "|" << left << setw(9) << "Category";
+		cout << "|" << left << setw(9) << "Day Price";
+		cout << "|" << left << setw(9) << "Status";
 		cout << "|" << left << setw(13) << "Return Date" << "|\n";
 		cout << " ______________________________________________________________________________________________________________________\n\n";
 

@@ -40,10 +40,10 @@ private:
 				}
 			}
 
-			cout << "\nUsername : ";
+			cout << "\n Username : ";
 			Username = clsInputValidate::ReadString();
 
-			cout << "Password : ";
+			cout << " Password : ";
 			Password = clsInputValidate::ReadString();
 
 			CurrentUser = clsUser::Find(Username, Password);

@@ -72,6 +72,9 @@
     <ClInclude Include="clsReturnBookScreen.h">
       <Filter>Header Files\screens</Filter>
     </ClInclude>
+    <ClInclude Include="clsAddNewBookScreen.h">
+      <Filter>Header Files\screens</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

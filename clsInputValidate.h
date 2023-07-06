@@ -67,6 +67,11 @@ public:
 		return !(clsDate::IsDateBeforeDate2(Date, From) || clsDate::IsDateAfterDate2(Date, To));
 	}
 
+	static bool IsValidDate(short Day, short Month, short Year)
+	{
+		return clsDate::IsValid(Day, Month, Year);
+	}
+
 	static bool IsValidDate(clsDate Date)
 	{
 		return clsDate::IsValid(Date);
@@ -83,6 +88,20 @@ public:
 		} while (str == "");
 
 		return str;
+	}
+
+	static clsDate ReadDate(string ErrorMessage)
+	{
+		string Date;
+
+		do
+		{
+			cout << "Enter Date Like 1/2/2020? ";
+			Date = ReadString();
+
+		} while (IsValidDate(clsDate(Date)));
+
+		return clsDate(Date);
 	}
 
 	/*static bool IsNumberBetween(short Number, short From, short To)

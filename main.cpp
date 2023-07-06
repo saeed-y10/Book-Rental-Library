@@ -6,6 +6,7 @@
 #include "clsLoginScreen.h"
 #include "clsFindBookScreen.h"
 #include "clsInputValidate.h"
+#include "clsAddNewBookScreen.h"
 
 using namespace std;
 
