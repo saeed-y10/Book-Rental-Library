@@ -146,7 +146,7 @@ private:
 				break;
 			}
 			
-			case clsBook::enSaveResult::svFaildINotExist:
+			case clsBook::enSaveResult::svFaildIDnotExist:
 			{
 				cout << "\n Book update faild \"ID not exist in database\".\n";
 				break;

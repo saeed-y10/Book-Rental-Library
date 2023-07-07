@@ -16,7 +16,7 @@ class clsManageUsersScreen : protected clsScreen
 
 private:
 	
-	static void _GoBackToManageUsersMenuOption()
+	static void _GoBackToManageUsers()
 	{
 		cout << "\n Press Any Key To Go Back To Manage Users Menu...\n";
 
@@ -84,7 +84,7 @@ private:
 		{
 			clsListUsersScreen::ShowListUsersScreen();
 
-			_GoBackToManageUsersMenuOption();
+			_GoBackToManageUsers();
 
 			break;
 		}
@@ -114,7 +114,7 @@ private:
 		{
 			clsFindUserScreen::ShowFindUserScreen();
 
-			_GoBackToManageUsersMenuOption();
+			_GoBackToManageUsers();
 
 			break;
 		}
@@ -130,15 +130,15 @@ private:
 	static void _ShowManageUsersMenu()
 	{
 		if (!CheckAccessRights(clsUser::pManageUsers))
-		{
 			return;
-		}
 
 		enManageUsersMenuOptions Option = enManageUsersMenuOptions::eBackToMainMenu;
 
 		do
 		{
 			_PrintMenuHedar();
+
+			Option = _ReadManageUsersMenuOption();
 
 			_PerformManageUsersMenuOption(Option);
 		

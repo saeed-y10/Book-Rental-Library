@@ -169,6 +169,8 @@ private:
 		case enMainMenuOptions::eFindBook:
 		{
 			_ShowFindBookScreen();
+	
+			_PrintGoBackToMainMenu();
 
 			break;
 		}
@@ -177,12 +179,16 @@ private:
 		{
 			_ShowRentBookScreen();
 
+			_PrintGoBackToMainMenu();
+
 			break;
 		}
 
 		case enMainMenuOptions::eReturnBook:
 		{
 			_ShowRenturnBookScreen();
+
+			_PrintGoBackToMainMenu();
 
 			break;
 		}
@@ -191,6 +197,8 @@ private:
 		{
 			_AddNewBookScreen();
 			
+			_PrintGoBackToMainMenu();
+
 			break;
 		}
 
@@ -198,12 +206,16 @@ private:
 		{
 			_ShowUpdateBookScreen();
 			
+			_PrintGoBackToMainMenu();
+
 			break;
 		}
 
 		case enMainMenuOptions::eDeleteBook:
 		{
 			_ShowDeleteBookScreen();
+
+			_PrintGoBackToMainMenu();
 
 			break;
 		}
@@ -212,6 +224,8 @@ private:
 		{
 			_ShowManageRentersScreen();
 
+			_PrintGoBackToMainMenu();
+
 			break;
 		}
 
@@ -219,11 +233,15 @@ private:
 		{
 			_ShowManageUsersScreen();
 
+			_PrintGoBackToMainMenu();
+
 			break;
 		}
 
 		case enMainMenuOptions::eLogout:
 		{
+			_Logout();
+
 			break;
 		}
 

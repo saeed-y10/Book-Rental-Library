@@ -28,15 +28,15 @@ private:
 			{
 				if (FaildLoginCount == 5)
 				{
-					cout << "\nYou Are Locked After 5 Faild Trail(s).\n";
+					cout << "\n You Are Locked After 5 Faild Trail(s).\n";
 
 					return false;
 				}
 
 				else
 				{
-					cout << "\nInvalid Username/Password!";
-					cout << "\nYou Have " << 5 - FaildLoginCount << " Trail(s) To Login." << "\n";
+					cout << "\n Invalid Username/Password!";
+					cout << "\n You Have " << 5 - FaildLoginCount << " Trail(s) To Login." << "\n";
 				}
 			}
 

@@ -21,7 +21,7 @@ private:
 	// enum declaration
 	enum enCategorys;
 	
-	// all book modes
+	// book object modes
 	enum enMode
 	{
 		eEmpty = 0,
@@ -29,7 +29,7 @@ private:
 		eUpdate = 2,
 	};
 
-	// convert book record to string
+	// convert book record to line
 	static string _ConvertBookObjectToLine(clsBook Book, string Seperator = "#//#")
 	{
 		string Line = "";
@@ -50,7 +50,7 @@ private:
 		return Line;
 	}
 	
-	// converts string to book record
+	// converts line to book record
 	static clsBook _ConvertLineToBookObject(string Line, string Seperator = "#//#")
 	{
 		vector<string> vLine = clsString::Split(Line, Seperator);
@@ -64,13 +64,13 @@ private:
 	}
 	
 	// load all books from file
-	static vector<clsBook> _LoadBooksDataFromFile(bool OnlyAvailable = false, string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile()
 	{
 		vector<clsBook> vBooks;
 
 		fstream File;
 
-		File.open(FileName, ios::in);
+		File.open("Books.txt", ios::in);
 
 		if (File.is_open())
 		{
@@ -79,19 +79,8 @@ private:
 			while (getline(File, Line))
 			{
 				clsBook Book = _ConvertLineToBookObject(Line);
-
-				if (OnlyAvailable)
-				{
-					if (Book.IsAvailable())
-					{
-						vBooks.push_back(Book);
-					}
-				}
-
-				else
-				{
-					vBooks.push_back(Book);
-				}
+				
+				vBooks.push_back(Book);
 			}
 
 			File.close();
@@ -101,7 +90,7 @@ private:
 	}
 
 	// load books dat by category from file
-	static vector<clsBook> _LoadBooksDataFromFile(enCategorys Category, bool OnlyAvailable = false, string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile(enCategorys Category, string FileName = "Books.txt")
 	{
 		vector<clsBook> vBooks;
 
@@ -119,18 +108,7 @@ private:
 
 				if (Book.Category == Category)
 				{
-					if (OnlyAvailable)
-					{
-						if (Book.IsAvailable())
-						{
-							vBooks.push_back(Book);
-						}
-					}
-
-					else
-					{
 						vBooks.push_back(Book);
-					}
 				}
 
 			}
@@ -142,7 +120,7 @@ private:
 	}
 
 	// load books dat by author name from file
-	static vector<clsBook> _LoadBooksDataFromFile(string Author, bool OnlyAvailable = false, string FileName = "Books.txt")
+	static vector<clsBook> _LoadBooksDataFromFile(string Author, string FileName = "Books.txt")
 	{
 		vector<clsBook> vBooks;
 
@@ -159,21 +137,7 @@ private:
 				clsBook Book = _ConvertLineToBookObject(Line);
 
 				if (Book.Author == Author)
-				{
-					if (OnlyAvailable)
-					{
-						if (Book.IsAvailable())
-						{
-							vBooks.push_back(Book);
-						}
-					}
-
-					else
-					{
-						vBooks.push_back(Book);
-					}
-					
-				}
+					vBooks.push_back(Book);		
 
 			}
 
@@ -237,6 +201,14 @@ private:
 	// update current book and update book object in database
 	void _Update()
 	{
+		if (_Mode == enMode::eNew)
+		{
+			_AddNew();
+			_Mode = enMode::eUpdate;
+
+			return;
+		}
+
 		vector<clsBook> vBooks = _LoadBooksDataFromFile();
 
 		for (clsBook &Book : vBooks)
@@ -284,13 +256,13 @@ public:
 		if (DayPrice <= .0)
 			DayPrice = 1;
 
-		this->Renter.DayPrice = DayPrice;
 		_Mode = Mode;
 		_ID = ID;
 		_Name = Name;
 		_Category = Categorys;
 		_Author = Author;
 		_DayPrice = DayPrice;
+		this->Renter.DayPrice = DayPrice;
 		Renter.DayPrice = _DayPrice;
 		_Available = true;
 		_MarkForDelete = false;
@@ -315,12 +287,20 @@ public:
 		svFaildEmpty = 0,
 		svSucceeded = 1,
 		svFaildIDExist = 2,
-		svFaildINotExist = 3,
+		svFaildIDnotExist = 3,
 	};
 
 	// delete the book from database
 	bool Delete()
 	{
+		// check if object is already in database if not return false
+		if (_Mode == enMode::eEmpty || _Mode == enMode::eNew)
+		{
+			_MarkForDelete = true;
+
+			return false;
+		}
+
 		vector<clsBook> vBooks = _LoadBooksDataFromFile();
 
 		for (clsBook& Book : vBooks)
@@ -505,12 +485,6 @@ public:
 		return _MarkForDelete;
 	}
 
-	// clsBook object modes
-	enMode Mode()
-	{
-		return _Mode;
-	}
-
 	// read only property
 	int ID()
 	{
@@ -631,23 +605,41 @@ public:
 	}
 
 	// return all books in database
-	static vector<clsBook> getBooksList(bool OnlyAvailable = false)
+	static vector<clsBook> getBooksList()
 	{
-		return _LoadBooksDataFromFile(OnlyAvailable);
+		return _LoadBooksDataFromFile();
 	}
 
 	// return all books in database by category
-	static vector<clsBook> getBooksList(enCategorys Category, bool OnlyAvailable = false)
+	static vector<clsBook> getBooksList(enCategorys Category)
 	{
-		return _LoadBooksDataFromFile(Category, OnlyAvailable);
+		return _LoadBooksDataFromFile(Category);
 	}
 
 	// return all books in database by author name
-	static vector<clsBook> getBooksList(string Author, bool OnlyAvailable = false)
+	static vector<clsBook> getBooksList(string Author)
 	{
-		return _LoadBooksDataFromFile(Author, OnlyAvailable);
+		return _LoadBooksDataFromFile(Author);
 	}
 
+	// return all books in database by renter name
+	static vector<clsBook> getBooksList(string FirstName, string LastName)
+	{
+		vector<clsBook> vBooks = getRentedBooksList();
+		vector<clsBook> vBooksList;
+
+		string Fullname = FirstName + ' ' + LastName;
+
+		for (clsBook &Book : vBooks)
+		{
+			if (Book.Renter.FullName() == Fullname)
+				vBooksList.push_back(Book);
+		}
+
+		return vBooksList;
+	}
+
+	// return all rented books from file
 	static vector<clsBook> getRentedBooksList()
 	{
 		vector<clsBook> vBooks;
@@ -665,6 +657,35 @@ public:
 				clsBook Book = _ConvertLineToBookObject(Line);
 
 				if (!Book.IsAvailable())
+				{
+					vBooks.push_back(Book);
+				}
+			}
+
+			File.close();
+		}
+
+		return vBooks;
+	}
+
+	// return all available books from file
+	static vector<clsBook> getAvailableBooksList()
+	{
+		vector<clsBook> vBooks;
+
+		fstream File;
+
+		File.open("Books.txt", ios::in);
+
+		if (File.is_open())
+		{
+			string Line = "";
+
+			while (getline(File, Line))
+			{
+				clsBook Book = _ConvertLineToBookObject(Line);
+
+				if (Book.IsAvailable())
 				{
 					vBooks.push_back(Book);
 				}

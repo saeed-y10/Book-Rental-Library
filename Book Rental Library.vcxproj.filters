@@ -102,6 +102,12 @@
     <ClInclude Include="clsListRentersScreen.h">
       <Filter>Header Files\screens</Filter>
     </ClInclude>
+    <ClInclude Include="clsFindRenterScreen.h">
+      <Filter>Header Files\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsReturnBooksScreen.h">
+      <Filter>Header Files\screens</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

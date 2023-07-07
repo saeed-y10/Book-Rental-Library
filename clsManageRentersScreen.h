@@ -6,6 +6,8 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsListRentersScreen.h"
+#include "clsFindRenterScreen.h"
+#include "clsReturnBooksScreen.h"
 
 using namespace std;
 
@@ -77,7 +79,7 @@ private:
 
 	static void _ShowFindRenterScreen()
 	{
-
+		clsFindRenterScreen::ShowFindRenterScreen();
 	}
 
 	static void _ShowUpdateRenterScreen()
@@ -87,7 +89,7 @@ private:
 
 	static void _ShowReturnBooksScreen()
 	{
-
+		clsReturnBooksScreen::ShowReturnBooksScreen();
 	}
 
 	static void _PerformManageRentersMenuOption(enManageRentersMenuOptions Option)
@@ -105,6 +107,8 @@ private:
 
 		case enManageRentersMenuOptions::eFindRenter:
 		{
+			_ShowFindRenterScreen();
+
 			break;
 		}
 
@@ -116,12 +120,14 @@ private:
 
 		case enManageRentersMenuOptions::eReturnBooks:
 		{
+			_ShowReturnBooksScreen();
+
 			break;
 		}
 
 		case enManageRentersMenuOptions::eGoBack:
 		{
-			break;
+			return;
 		}
 
 		default:
