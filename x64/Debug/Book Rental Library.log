@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\saeed\source\repos\Book Rental Library\main.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\saeed\source\repos\Book Rental Library\clsBook.h(276,2): warning C4240: nonstandard extension used: access to 'clsBook::enCategorys' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\saeed\source\repos\Book Rental Library\clsBook.h(22): message : see declaration of 'clsBook::enCategorys'
+C:\Users\saeed\source\repos\Book Rental Library\clsUser.h(239,2): warning C4240: nonstandard extension used: access to 'clsUser::stLoginRegisterRecord' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\saeed\source\repos\Book Rental Library\clsUser.h(18): message : see declaration of 'clsUser::stLoginRegisterRecord'
+  Book Rental Library.vcxproj -> C:\Users\saeed\source\repos\Book Rental Library\x64\Debug\Book Rental Library.exe

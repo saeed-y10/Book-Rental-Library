@@ -67,6 +67,17 @@ public:
 		return _RentDate.ToString();
 	}
 
+	void AddDaysToRent(short Days)
+	{
+		if (IsDelayReturn())
+			return;
+
+		if (Days < 1)
+			return;
+
+		setRentDays(_RentDays + Days);
+	}
+
 	string ReturnDate()
 	{
 		return _ReturnDate.ToString();

@@ -8,6 +8,7 @@
 #include "clsListRentersScreen.h"
 #include "clsFindRenterScreen.h"
 #include "clsReturnBooksScreen.h"
+#include "clsUpdateRenterScreen.h"
 
 using namespace std;
 
@@ -84,7 +85,7 @@ private:
 
 	static void _ShowUpdateRenterScreen()
 	{
-
+		clsUpdateRenterScreen::ShowRentBookScreen();
 	}
 
 	static void _ShowReturnBooksScreen()
@@ -114,6 +115,7 @@ private:
 
 		case enManageRentersMenuOptions::eUpdateRenter:
 		{
+			_ShowUpdateRenterScreen();
 
 			break;
 		}

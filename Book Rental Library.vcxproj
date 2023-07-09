@@ -164,6 +164,7 @@
     <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUpdateBookScreen.h" />
+    <ClInclude Include="clsUpdateRenterScreen.h" />
     <ClInclude Include="clsUser.h" />
     <ClInclude Include="clsUtil.h" />
     <ClInclude Include="Global.h" />

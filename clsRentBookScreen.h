@@ -157,15 +157,6 @@ private:
 
 	static void _ShowRentBookScreen()
 	{
-		_PrintMenuHedar();
-
-		_RentBook();
-	}
-
-public:
-
-	static void ShowRentBookScreen()
-	{
 		if (!CheckAccessRights(clsUser::enPermissions::pRentBook))
 			return;
 
@@ -175,13 +166,22 @@ public:
 		{
 			clsUtil::ResetScreen();
 
-			_ShowRentBookScreen();
+			_PrintMenuHedar();
 
+			_RentBook();
+			
 			cout << "\n Do you want to rent more books? Y/N? ";
 			cin >> RentMore;
 
 		} while (toupper(RentMore) == 'Y');
 
+	}
+
+public:
+
+	static void ShowRentBookScreen()
+	{
+			_ShowRentBookScreen();
 	}
 
 };
