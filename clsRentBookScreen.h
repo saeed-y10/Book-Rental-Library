@@ -24,6 +24,7 @@ private:
 	{
 		string FirstName = "";
 		string LastName = "";
+		string Gender = "";
 		string Email = "";
 		string Phone = "";
 		short RentDays = 0;
@@ -96,6 +97,15 @@ private:
 		cout << " Last Name       : ";
 		Info.LastName = clsInputValidate::ReadString();
 
+		do
+		{
+			cout << " Gender          : ";
+			Info.Gender = clsInputValidate::ReadString();
+
+			Info.Gender = clsString::UpperAllLetters(Info.Gender);
+
+		} while (Info.Gender != "MALE" && Info.Gender != "FEMALE" && Info.Gender != "M" && Info.Gender != "F");
+
 		cout << " Email           : ";
 		Info.Email = clsInputValidate::ReadString();
 
@@ -135,7 +145,7 @@ private:
 		{
 			stRenterInfo Info = _ReadRenterInfo();
 
-			if (Book.RentBook(Info.FirstName, Info.LastName, Info.Email, Info.Phone, Info.RentDays))
+			if (Book.RentBook(Info.FirstName, Info.LastName, Info.Gender, Info.Email, Info.Phone, Info.RentDays))
 			{
 				cout << " \n Book rented successfully.\n";
 

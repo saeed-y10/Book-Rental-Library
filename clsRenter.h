@@ -18,8 +18,8 @@ private:
 
 public:
 
-	clsRenter(string FirstName,string LastName, string Email, string Phone, short RentDays, clsDate RentDate = clsDate())
-		: clsPerson(FirstName, LastName, Email, Phone), _RentDate(RentDate), _ReturnDate()
+	clsRenter(string FirstName,string LastName, string Gender, string Email, string Phone, short RentDays, clsDate RentDate = clsDate())
+		: clsPerson(FirstName, LastName, Gender, Email, Phone), _RentDate(RentDate), _ReturnDate()
 	{
 		_RentDate = RentDate;
 		_ReturnDate = clsDate::IncreaceDateByNDays(RentDays, _RentDate);
@@ -33,7 +33,7 @@ public:
 
 	static clsRenter getEmptyRenterObject()
 	{
-		return clsRenter(" ", " ", " ", " ", 0, clsDate(1, 1, 1));
+		return clsRenter(" ", " ", " ", " ", " ", 0, clsDate(1, 1, 1));
 	}
 
 	void setDayPrice(float DayPrice)

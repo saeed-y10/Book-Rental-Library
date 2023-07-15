@@ -22,6 +22,7 @@ private:
 	{
 		string FirstName = "";
 		string LastName = "";
+		string Gender = "";
 		string Email = "";
 		string Phone = "";
 	};
@@ -96,6 +97,9 @@ private:
 		cout << left << setw(35) << " " << "|" << left << setw(25) << "Last Name" << "|" << left << setw(25) << Book.Renter.LastName << "|\n";
 		cout << left << setw(35) << " " << "-----------------------------------------------------\n";
 
+		cout << left << setw(35) << " " << "|" << left << setw(25) << "Gender" << "|" << left << setw(25) << Book.Renter.Gender << "|\n";
+		cout << left << setw(35) << " " << "-----------------------------------------------------\n";
+
 		cout << left << setw(35) << " " << "|" << left << setw(25) << "Email" << "|" << left << setw(25) << Book.Renter.Email << "|\n";
 		cout << left << setw(35) << " " << "-----------------------------------------------------\n";
 
@@ -115,6 +119,15 @@ private:
 
 		cout << " Last Name       : ";
 		Info.LastName = clsInputValidate::ReadString();
+
+		do
+		{
+			cout << " Gender          : ";
+			Info.Gender = clsInputValidate::ReadString();
+			
+			Info.Gender = clsString::UpperAllLetters(Info.Gender);
+
+		} while (Info.Gender != "MALE" && Info.Gender != "FEMALE" && Info.Gender != "M" && Info.Gender != "F");
 
 		cout << " Email           : ";
 		Info.Email = clsInputValidate::ReadString();

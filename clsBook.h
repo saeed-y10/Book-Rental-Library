@@ -401,7 +401,7 @@ public:
 
 		case clsBook::eNew:
 		{
-			if (IsIDNumberExist(ID()))
+			if (IsBookExist(ID()))
 			{
 				return enSaveResult::svFaildIDExist;
 			}
@@ -532,7 +532,7 @@ public:
 	}
 	
 	// check is book id exist in database and return true or false
-	static bool IsIDNumberExist(int ID)
+	static bool IsBookExist(int ID)
 	{
 		return !(Find(ID).IsEmpty());
 	}

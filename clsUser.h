@@ -29,7 +29,7 @@ private:
 	{
 		vector<string> vLine = clsString::Split(Line, Seperator);
 
-		return clsUser(enMode::UpdateMode, vLine[0], vLine[1], vLine[2], vLine[3], vLine[4], clsUtil::DecryptText(vLine[5]), stoi(vLine[6]));
+		return clsUser(enMode::UpdateMode, vLine[0], vLine[1], vLine[2], vLine[3], vLine[4], vLine[5], clsUtil::DecryptText(vLine[6]), stoi(vLine[7]));
 	}
 
 	static string _ConvertUserObjectToLine(clsUser User, string Seperator = "#//#")
@@ -38,6 +38,7 @@ private:
 
 		DataLine += User.FirstName + Seperator;
 		DataLine += User.LastName + Seperator;
+		DataLine += User.Gender + Seperator;
 		DataLine += User.Email + Seperator;
 		DataLine += User.Phone + Seperator;
 		DataLine += User.Username + Seperator;
@@ -113,7 +114,7 @@ private:
 
 	static clsUser _GetEmptyUserObject()
 	{
-	  	return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
+	  	return clsUser(enMode::EmptyMode, "", "", "", "", "", "", "", 0);
 	}
 
 	bool _Delete()
@@ -212,8 +213,8 @@ private:
 
 public:
 
-	clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string Username, string Password, int Permissions)
-		: clsPerson(FirstName, LastName, Email, Phone)
+	clsUser(enMode Mode, string FirstName, string LastName, string Gender, string Email, string Phone, string Username, string Password, int Permissions)
+		: clsPerson(FirstName, LastName, Gender, Email, Phone)
 	{
 		_Mode = Mode;
 		_Username = Username;
@@ -376,7 +377,7 @@ public:
 
 		else
 		{
-			return clsUser(enMode::AddNewMode, "", "", "", "", Username, "", 0);
+			return clsUser(enMode::AddNewMode, "", "", "", "", "", Username, "", 0);
 		}
 	}
 
