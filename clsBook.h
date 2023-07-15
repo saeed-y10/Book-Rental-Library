@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iomanip>
 #include <fstream>
 #include <vector>
@@ -10,6 +9,7 @@
 #include "clsDate.h"
 #include "clsString.h"
 #include "clsUtil.h"
+#include "Global.h"
 
 using namespace std;
 
@@ -18,9 +18,11 @@ class clsBook
 
 private:
 
-	// enum declaration
+	// declarations
 	enum enCategorys;
-	
+	struct stRentRegisterRecord;
+	struct stSellRegisterRecord;
+
 	// book object modes
 	enum enMode
 	{
@@ -28,6 +30,72 @@ private:
 		eNew = 1,
 		eUpdate = 2,
 	};
+
+	struct stRentRegisterRecord
+	{
+		string RenterName;
+		string RenterEmail;
+		string RenterPhone;
+		short RentDays;
+		float DayPrice;
+		string BookID;
+		string BookName;
+		string AuthorName;
+		string Category;
+		string Username;
+		string DateTime;
+	};
+
+	struct stSellRegisterRecord
+	{
+		string BuyerName;
+		string BuyerEmail;
+		string BuyerPhone;
+		string BookID;
+		string BookName;
+		string AuthorName;
+		string Category;
+		float SellPrice;
+		string Username;
+		string DateTime;
+	};
+
+	string _PrepareRentRegisterRecord(string Seperator)
+	{
+		string Line = "";
+
+		Line += Renter.FullName() + Seperator;
+		Line += Renter.Email + Seperator;
+		Line += Renter.Phone + Seperator;
+		Line += to_string(Renter.RentDays) + Seperator;
+		Line += to_string(Renter.DayPrice) + Seperator;
+		Line += to_string(_ID) + Seperator;
+		Line += _Name + Seperator;
+		Line += _Author + Seperator;
+		Line += getCategoryName() + Seperator;
+		Line += CurrentUser.Username + Seperator;
+		Line += clsDate::GetSystemDateTimeString() + Seperator;
+
+		return Line;
+	}
+
+	string _PrepareSellRegisterRecord(string Seperator)
+	{
+		string Line = "";
+
+		Line += Renter.FullName() + Seperator;
+		Line += Renter.Email + Seperator;
+		Line += Renter.Phone + Seperator;
+		Line += to_string(_ID) + Seperator;
+		Line += _Name + Seperator;
+		Line += _Author + Seperator;
+		Line += getCategoryName() + Seperator;
+		Line += to_string(_SellPrice) + Seperator;
+		Line += CurrentUser.Username + Seperator;
+		Line += clsDate::GetSystemDateTimeString() + Seperator;
+
+		return Line;
+	}
 
 	// convert book record to line
 	static string _ConvertBookObjectToLine(clsBook Book, string Seperator = "#//#")
@@ -42,6 +110,7 @@ private:
 		Line += to_string(Book.DayPrice) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.FirstName) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.LastName) + Seperator;
+		Line += clsUtil::EncryptText(Book.Renter.Gender) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.Email) + Seperator;
 		Line += clsUtil::EncryptText(Book.Renter.Phone) + Seperator;
 		Line += clsUtil::EncryptText(to_string(Book.Renter.RentDays)) + Seperator;
@@ -55,7 +124,7 @@ private:
 	{
 		vector<string> vLine = clsString::Split(Line, Seperator);
 		
-		clsRenter Renter(clsUtil::DecryptText(vLine[6]), clsUtil::DecryptText(vLine[7]), clsUtil::DecryptText(vLine[8]), clsUtil::DecryptText(vLine[9]), stoi(clsUtil::DecryptText(vLine[10])), clsDate(clsUtil::DecryptText(vLine[11])));
+		clsRenter Renter(clsUtil::DecryptText(vLine[6]), clsUtil::DecryptText(vLine[7]), clsUtil::DecryptText(vLine[8]), clsUtil::DecryptText(vLine[9]), clsUtil::DecryptText(vLine[10]), stoi(clsUtil::DecryptText(vLine[11])), clsDate(clsUtil::DecryptText(vLine[12])));
 		clsBook Book(enMode::eUpdate, stoi(vLine[1]), clsUtil::DecryptText(vLine[2]), clsUtil::DecryptText(vLine[3]), (enCategorys)stoi(vLine[4]), stof(vLine[5]), Renter);
 
 		Book._Available = stoi(vLine[0]);
@@ -238,6 +307,7 @@ private:
 	enCategorys _Category;
 	string _Author;
 	float _DayPrice;
+	float _SellPrice;
 	bool _Available;
 	bool _MarkForDelete;
 
@@ -576,12 +646,12 @@ public:
 	}
 
 	// rent a book
-	bool RentBook(string FirstName, string LastName, string Email, string Phone, short RentDays)
+	bool RentBook(string FirstName, string LastName, string Gender, string Email, string Phone, short RentDays)
 	{
 		if (!IsAvailable())
 			return false;
 
-		Renter = clsRenter(FirstName, LastName, Email, Phone, RentDays);
+		Renter = clsRenter(FirstName, LastName, Gender, Email, Phone, RentDays);
 		Renter.DayPrice = _DayPrice;
 		_Available = false;
 
