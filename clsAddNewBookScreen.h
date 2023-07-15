@@ -25,7 +25,7 @@ private:
 		cout << " ID Number: ";
 		int ID = clsInputValidate::ReadNumberBetween<int>(1, INT_MAX, " ID Number: ");
 
-		while (clsBook::IsIDNumberExist(ID))
+		while (clsBook::IsBookExist(ID))
 		{
 			cout << " ID number already exist enter another one: ";
 			ID = clsInputValidate::ReadNumberBetween<int>(1, INT_MAX, " ID Number: ");
