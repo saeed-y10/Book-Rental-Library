@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "clsString.h"
 
 using namespace std;
 
@@ -12,15 +13,17 @@ private:
 
 	string _FirstName;
 	string _LastName;
+	string _Gender;
 	string _Email;
 	string _Phone;
 
 public:
 
-	clsPerson(string FirstName, string LastName, string Email, string Phone)
+	clsPerson(string FirstName, string LastName, string Gender, string Email, string Phone)
 	{
 		_FirstName = FirstName;
 		_LastName = LastName;
+		SetGender(Gender);
 		_Email = Email;
 		_Phone = Phone;
 	}
@@ -55,6 +58,28 @@ public:
 		else
 			return _FirstName + " " + _LastName;
 	}
+
+	void SetGender(string Gender)
+	{
+		Gender = clsString::UpperAllLetters(Gender);
+
+		if (Gender != "M" && Gender != "F" && Gender != "MALE" && Gender != "FEMALE")
+			Gender = " ";
+
+		if (Gender == "M" || Gender == "MALE")
+			Gender = "Male";
+		
+		else if (Gender == "F" || Gender == "FEMALE")
+			Gender = "Female";
+
+		_Gender = Gender;
+	}
+
+	string GetGender()
+	{
+		return _Gender;
+	}
+	__declspec(property(get = GetGender, put = SetGender)) string Gender;
 
 	void SetEmail(string Email)
 	{
