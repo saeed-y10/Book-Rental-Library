@@ -109,7 +109,7 @@
       <Filter>Header Files\screens</Filter>
     </ClInclude>
     <ClInclude Include="clsUpdateRenterScreen.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
