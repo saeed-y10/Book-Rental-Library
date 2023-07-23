@@ -1,5 +1,5 @@
 # Book-Rental-Library
-Simple system to manage library, rent books and deal with renters
+Simple system to manage libraries, rent books and deal with renters
 
 ## Default User
 Username: Admin
